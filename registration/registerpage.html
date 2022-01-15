@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="register.css">
+    
+</head>
+
+<body>
+
+    <div class="container">
+        
+            <h1 class="label">Registration page</h1>
+        
+        <hr>
+
+        <form class="regist_form" action="../login/loginpage.html"  name="form" onsubmit="return validated()">
+
+            <div class="font">username</div>
+            <input type="text" name="username" class="input">
+            <div id="user_error">Please fill up your username</div>
+
+            <div class="font font2">Password</div>
+            <input type="password" name="password" class="input">
+            <div id="pass_error">Please fill up your Password</div>
+
+            <div class="font font3">confirm password </div>
+            <input type="password" name="passwordconf" class="input">
+            <div id="passconf_error">Please fill up your Password confirm</div>
+            <div id="passmatch_error" style="display: none;">password not match</div>
+
+            
+
+            <div class="font font4">Email</div>
+            <input type="email" name="email" class="input">
+            <div id="email_error">Please fill up your Email</div>
+
+            <div id="gender">Gender</div>
+            <div class="divgender">
+                <label><input type="radio" name="gender" value="male" class="gend">Male</label>
+                <label><input type="radio" name="gender" value="female" class="gend">Female</label>
+                <div id="gender_error">Please select your gender</div>
+            </div>
+            <br>
+            <input type="submit" value="sigh up" class="button" style="width: 500px;">
+        </form>
+        <script src="register.js"></script>
+</body>
+
+</html>
