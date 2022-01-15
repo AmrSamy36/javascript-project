@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        body {
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            font-family: sans-serif;
+        }
+
+        .container {
+            position: relative;
+            margin-top: 100px;
+            width: 450px;
+            height: auto;
+            background: #dedede;
+            border-radius: 5px;
+        }
+
+        .label {
+            padding: 20px 130px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #130f40;
+        }
+
+        .login_form {
+            padding: 20px 40px;
+        }
+
+        .login_form .font {
+            font-size: 18px;
+            color: #130f40;
+            margin: 5px 0;
+        }
+
+        .login_form input {
+            height: 40px;
+            width: 350px;
+            padding: 0 5px;
+            font-size: 18px;
+            outline: none;
+            border: 1px solid silver;
+        }
+        .login_form input:hover{
+            background-color: gray;
+        }
+
+        .login_form .font2 {
+            margin-top: 30px;
+        }
+
+        .login_form .button {
+            margin: 45px 0 30px 0;
+            height: 45px;
+            width: 365px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: 1px solid black;
+        }
+
+        .login_form .button:hover {
+            background: gray;
+        }
+
+        .login_form #user_error,
+        .login_form #pass_error {
+            margin-top: 5px;
+            width: 345px;
+            font-size: 18px;
+            color: #C62828;
+            background: rgba(255, 0, 0, 0.1);
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #EF9A9A;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="label">User Login</h1>
+        <!-- instead of # add the name of exam page -->
+        <form class="login_form" action="#" target="_blank" name="form" onsubmit="return validated()">
+            <div class="font">useremail</div>
+            <input type="text" name="username">
+            <div id="user_error">Please fill up your user email</div>
+            <div class="font font2">Password</div>
+            <input type="password" name="password">
+            <div id="pass_error">Please fill up your Password</div>
+            <input type="submit" value="Sign In" class="button">
+        </form>
+    </div>
+    <script>
+        var username = document.forms['form']['username'];
+        var password = document.forms['form']['password'];
+
+        var user_error = document.getElementById('user_error');
+        var pass_error = document.getElementById('pass_error');
+
+        username.addEventListener('textInput', username_Verify);
+        password.addEventListener('textInput', pass_Verify);
+        function validated() {
+            if (username.value == "") {
+                username.style.border = "1px solid red";
+                user_error.style.display = "block";
+                username.focus();
+                return false;
+            }
+            if (password.value.length < 6) {
+                password.style.border = "1px solid red";
+                pass_error.style.display = "block";
+                password.focus();
+                return false;
+            }
+        }
+        function username_Verify() {
+            if (username.value !== "") {
+                username.style.border = "1px solid silver";
+                user_error.style.display = "none";
+                return true;
+            }
+        }
+
+        function pass_Verify() {
+            if (password.value.length >= 5) {
+                password.style.border = "1px solid silver";
+                pass_error.style.display = "none";
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>
