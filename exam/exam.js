@@ -106,6 +106,16 @@ let quistObj = quiz.Questions;
 let index = 0;
 let score = 0;
 document.getElementById("examName").innerText = quiz.quizName;
+let user = JSON.parse(localStorage.getItem("loggedinUser"));
+
+document.getElementById("userName").innerText = user.name;
+if (user.gender === "male") {
+    document.getElementById("examContainer").style.backgroundColor = "blue"
+} else {
+    document.getElementById("examContainer").style.backgroundColor = "pink"
+
+}
+
 function displayQuestionNum(index) {
     let quistionId = quistObj[index].Id;
     let quistioEleId = document.getElementById("quistionId");
@@ -130,12 +140,12 @@ displayQuestionNum(index);
 
 function calculateScore(questionAnswer, questionNumber) {
     let q = quiz.Questions[questionNumber];
-    console.log(questionAnswer);
-    console.log(questionNumber);
 
     if (questionAnswer === q.CorrectAnswer) {
         score += q.Degree;
     }
+    console.log(questionAnswer);
+    console.log(questionNumber);
     console.log(score);
 
 };
@@ -148,7 +158,7 @@ function nextQuestions() {
         calculateScore(questionAnswer, index);
         radioIsChecked.checked = false
         index++
-        displayQuestionNum(index); console.log("\n\n");
+        displayQuestionNum(index); 
     }
 
 
@@ -156,7 +166,7 @@ function nextQuestions() {
         document.getElementById("Nextbtn").style.display = "none"
         document.getElementById("Finishbtn").style.display = "block"
     }
-    console.log("\n\n");
+    console.log("\n");
 }
 
 function finishExam() {
@@ -165,9 +175,7 @@ function finishExam() {
     if (radioIsChecked) {
         let questionAnswer = document.querySelector("label[for=" + radioIsChecked.id + "]").innerText
         calculateScore(questionAnswer, index);
-
         setCookie("score", score)
-
         window.location.href = ("../examScore/examScore.html");
     }
     if (timer <= 0) {
@@ -176,6 +184,7 @@ function finishExam() {
         window.location.href = ("../examScore/examScore.html");
     }
 }
-function setCookie(name, value) {
-    document.cookie = name + "=" + (value || "") + ";";
+
+function setCookie(name,value) {
+    document.cookie = name + "=" + (value) +  "; path=/";
 }

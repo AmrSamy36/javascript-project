@@ -3,9 +3,12 @@ var password = document.forms['form']['password'];
 
 var user_error = document.getElementById('user_error');
 var pass_error = document.getElementById('pass_error');
+var wrong = document.getElementById("wrongCredentials");
+
 
 username.addEventListener('textInput', username_Verify);
 password.addEventListener('textInput', pass_Verify);
+let user;
 function validated() {
     if (username.value == "") {
         username.style.border = "1px solid red";
@@ -17,6 +20,13 @@ function validated() {
         password.style.border = "1px solid red";
         pass_error.style.display = "block";
         password.focus();
+        return false;
+    }
+
+    user = JSON.parse(localStorage.getItem("loggedinUser"));
+    console.log(user);
+    if (user.password !== password.value) {
+        wrong.style.display = "block";
         return false;
     }
 }
