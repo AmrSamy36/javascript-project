@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            font-family: sans-serif;
+        }
+
+        .container {
+            position: relative;
+            margin-top: 100px;
+            width: 450px;
+            height: auto;
+            background: #dedede;
+            border-radius: 5px;
+        }
+
+        .label {
+            padding: 20px 130px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #130f40;
+        }
+
+        .regist_form {
+            padding: 20px 40px;
+        }
+
+
+
+        .regist_form .input {
+            height: 40px;
+            width: 350px;
+            padding: 0 5px;
+            font-size: 18px;
+            outline: none;
+            border: 1px solid silver;
+        }
+
+        .regist_form .font {
+            font-size: 18px;
+            color: #130f40;
+            margin: 5px 0;
+        }
+
+        .regist_form .font2 {
+            margin-top: 30px;
+        }
+
+        .regist_form .font3 {
+            margin-top: 30px;
+        }
+
+        .regist_form .font4 {
+            margin-top: 30px;
+        }
+
+        .regist_form .button {
+            margin: 45px 0 30px 0;
+            height: 45px;
+            width: 365px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: 1px solid #3949AB;
+        }
+
+        .regist_form .button:hover {
+            background: #151c6a;
+        }
+
+        .regist_form #user_error,
+        .regist_form #pass_error,
+        .regist_form #passconf_error,
+        .regist_form #email_error,
+        .regist_form #gender_error {
+            margin-top: 5px;
+            width: 345px;
+            font-size: 18px;
+            color: #C62828;
+            background: rgba(255, 0, 0, 0.1);
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #EF9A9A;
+            display: none;
+        }
+
+        #gender {
+            padding-top: 25px;
+            color: #130f40;
+        }
+
+        .divgender {
+            margin-top: 20px;
+            color: #130f40;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <center>
+            <h1 class="label">Registration page</h1>
+        </center>
+
+        <form class="regist_form" action="loginpage.html" target="_blank" name="form" onsubmit="return validated()">
+
+            <div class="font">username</div>
+            <input type="text" name="username" class="input">
+            <div id="user_error">Please fill up your username</div>
+
+            <div class="font font2">user Password</div>
+            <input type="password" name="password" class="input">
+            <div id="pass_error">Please fill up your Password</div>
+
+            <div class="font font3">password confirm</div>
+            <input type="password" name="passwordconf" class="input">
+            <div id="passconf_error">Please fill up your Password confirm</div>
+
+            <div class="font font4">Email</div>
+            <input type="email" name="email" class="input">
+            <div id="email_error">Please fill up your Email</div>
+
+            <div id="gender">Gender</div>
+            <div class="divgender">
+                <label><input type="radio" name="gender" value="male" class="gend">Male</label>
+                <label><input type="radio" name="gender" value="female" class="gend">Female</label>
+                <div id="gender_error">Please select your gender</div>
+            </div>
+            <br>
+            <input type="submit" value="okay" class="button">
+        </form>
+
+
+        <script>
+            var username = document.forms['form']['username'];
+            var password = document.forms['form']['password'];
+            var confirmpassword = document.forms['form']['passwordconf'];
+            var email = document.forms['form']['email'];
+            var gender = document.forms['form']['gender'];
+
+            var user_error = document.getElementById('user_error');
+            var pass_error = document.getElementById('pass_error');
+            var passconf_error = document.getElementById('passconf_error');
+            var email_error = document.getElementById('email_error');
+            var gender_error = document.getElementById('gender_error');
+
+            username.addEventListener('textInput', username_Verify);
+            password.addEventListener('textInput', pass_Verify);
+            confirmpassword.addEventListener('textInput', confpass_Verify);
+            email.addEventListener('textInput', email_Verify);
+            gender.addEventListener('textInput', gender_Verify);
+            function validated() {
+                if (username.value == "") {
+                    username.style.border = "1px solid red";
+                    user_error.style.display = "block";
+                    username.focus();
+                    return false;
+                }
+                if (password.value.length < 6) {
+                    password.style.border = "1px solid red";
+                    pass_error.style.display = "block";
+                    password.focus();
+                    return false;
+                }
+
+                if (confirmpassword.value == "") {
+                    confirmpassword.style.border = "1px solid red";
+                    passconf_error.style.display = "block";
+                    confirmpassword.focus();
+                    return false;
+                } else if (confirmpassword.value !== password.value) {
+                    confirmpassword.style.border = "1px solid red";
+                    passconf_error.style.display = "block";
+                    confirmpassword.focus();
+                    return false
+                }
+                if (email.value == "") {
+                    email.style.border = "1px solid red";
+                    email_error.style.display = "block";
+                    email.focus();
+                    return false;
+                }
+                if ((gender[0].checked == false) && (gender[1].checked == false)) {
+
+                    gender_error.style.display = "block";
+
+                    return false;
+                }
+            }
+
+            function username_Verify() {
+                if (username.value.length !== "") {
+                    username.style.border = "1px solid silver";
+                    user_error.style.display = "none";
+                    return true;
+                }
+            }
+            function pass_Verify() {
+                if (password.value.length >= 5) {
+                    password.style.border = "1px solid silver";
+                    pass_error.style.display = "none";
+                    return true;
+                }
+            }
+            function confpass_Verify() {
+                if (confirmpassword.value !== "") {
+                    confirmpassword.style.border = "1px solid silver";
+                    passconf_error.style.display = "none";
+                    return false;
+                } else if (confirmpassword.value == password.value) {
+                    confirmpassword.style.border = "1px solid silver";
+                    passconf_error.style.display = "none";
+                    return false
+                }
+            }
+            function email_Verify() {
+                if (email.value !== "") {
+                    email.style.border = "1px solid silver";
+                    email_error.style.display = "none";
+                    return true;
+                }
+            }
+
+        </script>
+</body>
+
+</html>
